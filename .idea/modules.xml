@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account-service/kafkademo-monorepo.account-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/account-service/kafkademo-monorepo.account-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/account-service/kafkademo-monorepo.account-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/account-service/kafkademo-monorepo.account-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/transaction-service/kafkademo-monorepo.transaction-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/transaction-service/kafkademo-monorepo.transaction-service.main.iml" />
     </modules>
   </component>

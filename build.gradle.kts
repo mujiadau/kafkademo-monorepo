@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "4.1.0" apply false
     id("io.spring.dependency-management") version "1.1.7" apply false
+    kotlin("jvm")
 }
 
 allprojects {
@@ -11,4 +12,13 @@ allprojects {
     repositories {
         mavenCentral()
     }
+}
+dependencies {
+    implementation(kotlin("stdlib-jdk8"))
+}
+repositories {
+    mavenCentral()
+}
+kotlin {
+    jvmToolchain(21)
 }

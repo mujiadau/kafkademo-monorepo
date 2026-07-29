@@ -5,6 +5,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="kafkademo-monorepo.account-service" options="-parameters" />
+      <module name="kafkademo-monorepo.account-service.main" options="-parameters" />
+      <module name="kafkademo-monorepo.account-service.test" options="-parameters" />
       <module name="kafkademo-monorepo.transaction-service" options="-parameters" />
       <module name="kafkademo-monorepo.transaction-service.main" options="-parameters" />
       <module name="kafkademo-monorepo.transaction-service.test" options="-parameters" />
