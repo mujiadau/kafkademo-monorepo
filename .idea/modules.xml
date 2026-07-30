@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-service/kafkademo-monorepo.customer-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-service/kafkademo-monorepo.customer-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/customer-service/kafkademo-monorepo.customer-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/customer-service/kafkademo-monorepo.customer-service.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/transaction-service/kafkademo-monorepo.transaction-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/transaction-service/kafkademo-monorepo.transaction-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/transaction-service/kafkademo-monorepo.transaction-service.test.iml" filepath="$PROJECT_DIR$/.idea/modules/transaction-service/kafkademo-monorepo.transaction-service.test.iml" />
     </modules>
   </component>
 </project>

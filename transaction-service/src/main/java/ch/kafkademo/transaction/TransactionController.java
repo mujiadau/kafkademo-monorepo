@@ -21,7 +21,7 @@ public class TransactionController {
     @PostMapping
     public ResponseEntity<TransactionEvent> create(@Valid @RequestBody TransactionRequest request) {
         TransactionEvent event = new TransactionEvent(
-                request.customerID(),
+                request.customerId(),
                 request.amount(),
                 "CHF",
                 System.currentTimeMillis()

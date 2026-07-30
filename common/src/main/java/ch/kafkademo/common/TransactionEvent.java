@@ -54,7 +54,7 @@ public class TransactionEvent {
     @Override
     public String toString() {
         return "TransactionEvent{" +
-                "customerID=" + customerId +
+                "customerId=" + customerId +
                 ",amount=" + amount +
                 ",currency=" + currency +
                 ",timestamp=" + timestamp + '}';
