@@ -16,3 +16,4 @@ rootProject.name = "kafkademo-monorepo"
 include("common")
 include("transaction-service")
 include("account-service")
+include("customer-service")

@@ -8,6 +8,9 @@
       <module name="kafkademo-monorepo.account-service" options="-parameters" />
       <module name="kafkademo-monorepo.account-service.main" options="-parameters" />
       <module name="kafkademo-monorepo.account-service.test" options="-parameters" />
+      <module name="kafkademo-monorepo.customer-service" options="-parameters" />
+      <module name="kafkademo-monorepo.customer-service.main" options="-parameters" />
+      <module name="kafkademo-monorepo.customer-service.test" options="-parameters" />
       <module name="kafkademo-monorepo.transaction-service" options="-parameters" />
       <module name="kafkademo-monorepo.transaction-service.main" options="-parameters" />
       <module name="kafkademo-monorepo.transaction-service.test" options="-parameters" />

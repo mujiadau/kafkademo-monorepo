@@ -1,4 +1,4 @@
-package ch.kafkademo.account;
+package ch.kafkademo.customer;
 
 import ch.kafkademo.common.TransactionEvent;
 import org.slf4j.Logger;
@@ -11,17 +11,17 @@ public class TransactionConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(TransactionConsumer.class);
 
-    private final AccountService accountService;
+    private final EmailService emailService;
 
-    public TransactionConsumer(AccountService accountService) {
-        this.accountService = accountService;
+    public TransactionConsumer(EmailService emailService) {
+        this.emailService = emailService;
     }
 
     @KafkaListener(
             topics = "${kafkademo.topic.transactions}",
-            groupId = "account-service")
+            groupId = "customer-service")
     public void onTransaction(TransactionEvent event) {
         log.info("Received transaction event: {}", event);
-        accountService.applyTransaction(event.getCustomerId(), event.getAmount());
+        emailService.notifyBalanceChange(event);
     }
 }
