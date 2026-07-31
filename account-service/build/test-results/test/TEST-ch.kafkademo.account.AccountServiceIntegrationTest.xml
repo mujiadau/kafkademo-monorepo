@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ch.kafkademo.account.AccountServiceIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-29T12:56:14.218Z" hostname="ELITELAPTOP" time="20.967">
+  <properties/>
+  <testcase name="consumingTransactionsUpdatesTheBalanceInPostgres()" classname="ch.kafkademo.account.AccountServiceIntegrationTest" time="2.208"/>
+  <system-out><![CDATA[14:56:14.266 [Test worker] INFO org.testcontainers.images.PullPolicy -- Image pull policy will be performed by: DefaultPullPolicy()
+14:56:14.278 [Test worker] INFO org.testcontainers.utility.ImageNameSubstitutor -- Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+14:56:14.308 [Test worker] INFO org.testcontainers.DockerClientFactory -- Testcontainers version: 2.0.5
+14:56:14.663 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+14:56:15.249 [Test worker] INFO org.testcontainers.dockerclient.DockerClientProviderStrategy -- Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+14:56:15.251 [Test worker] INFO org.testcontainers.DockerClientFactory -- Docker host IP address is localhost
+14:56:15.279 [Test worker] INFO org.testcontainers.DockerClientFactory -- Connected to docker: 
+  Server Version: 28.3.3
+  API Version: 1.51
+  Operating System: Docker Desktop
+  Total Memory: 15914 MB
+  Labels: 
+    com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+14:56:15.433 [Test worker] INFO tc.testcontainers/ryuk:0.14.0 -- Creating container for image: testcontainers/ryuk:0.14.0
+14:56:15.566 [Test worker] INFO org.testcontainers.utility.RegistryAuthLocator -- Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+14:56:15.782 [Test worker] INFO tc.testcontainers/ryuk:0.14.0 -- Container testcontainers/ryuk:0.14.0 is starting: b0645378a8c3891dbfb486369e8f39fc10726efd1d3b742e5240a188b6fbd995
+14:56:16.532 [Test worker] INFO tc.testcontainers/ryuk:0.14.0 -- Container testcontainers/ryuk:0.14.0 started in PT1.1002686S
+14:56:16.546 [Test worker] INFO org.testcontainers.utility.RyukResourceReaper -- Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+14:56:16.547 [Test worker] INFO org.testcontainers.DockerClientFactory -- Checking the system...
+14:56:16.548 [Test worker] INFO org.testcontainers.DockerClientFactory -- ✔︎ Docker server version should be at least 1.6.0
+14:56:16.550 [Test worker] INFO tc.apache/kafka:3.8.1 -- Creating container for image: apache/kafka:3.8.1
+14:56:16.746 [Test worker] INFO tc.apache/kafka:3.8.1 -- Container apache/kafka:3.8.1 is starting: 086723c0cfbc22e8a43d026c94af20846c9f71192ee6b28feec040b5471b591a
+14:56:21.676 [Test worker] INFO tc.apache/kafka:3.8.1 -- Container apache/kafka:3.8.1 started in PT5.1265748S
+14:56:21.679 [Test worker] INFO tc.postgres:16-alpine -- Creating container for image: postgres:16-alpine
+14:56:21.825 [Test worker] INFO tc.postgres:16-alpine -- Container postgres:16-alpine is starting: b422ef6aeaf4dc5c0a52fb06fa84d52a2f57e62b5e5c246ca0055c75c2f677b0
+14:56:25.619 [Test worker] INFO tc.postgres:16-alpine -- Container postgres:16-alpine started in PT3.9401928S
+14:56:25.620 [Test worker] INFO tc.postgres:16-alpine -- Container is started (JDBC URL: jdbc:postgresql://localhost:62193/test?loggerLevel=OFF)
+14:56:25.770 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ch.kafkademo.account.AccountServiceIntegrationTest]: AccountServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:56:25.966 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ch.kafkademo.account.AccountApplication for test class ch.kafkademo.account.AccountServiceIntegrationTest
+14:56:26.112 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [ch.kafkademo.account.AccountServiceIntegrationTest]: AccountServiceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:56:26.121 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration ch.kafkademo.account.AccountApplication for test class ch.kafkademo.account.AccountServiceIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.0)
+
+2026-07-29T14:56:26.619+02:00  INFO 26004 --- [account-service] [    Test worker] c.k.a.AccountServiceIntegrationTest      : Starting AccountServiceIntegrationTest using Java 21.0.12 with PID 26004 (started by daud9 in C:\Users\daud9\Documents\daud\projects\kafkademo-monorepo\account-service)
+2026-07-29T14:56:26.623+02:00  INFO 26004 --- [account-service] [    Test worker] c.k.a.AccountServiceIntegrationTest      : No active profile set, falling back to 1 default profile: "default"
+2026-07-29T14:56:27.354+02:00  INFO 26004 --- [account-service] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-29T14:56:27.448+02:00  INFO 26004 --- [account-service] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 1 JPA repository interface.
+2026-07-29T14:56:28.103+02:00  INFO 26004 --- [account-service] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-29T14:56:28.228+02:00  INFO 26004 --- [account-service] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-29T14:56:29.029+02:00  INFO 26004 --- [account-service] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-29T14:56:29.077+02:00  INFO 26004 --- [account-service] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-29T14:56:29.332+02:00  INFO 26004 --- [account-service] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@23e3a27f
+2026-07-29T14:56:29.335+02:00  INFO 26004 --- [account-service] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-29T14:56:29.452+02:00  INFO 26004 --- [account-service] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:62193/test?loggerLevel=OFF]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.14
+	Default catalog/schema: test/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-29T14:56:31.063+02:00  INFO 26004 --- [account-service] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-29T14:56:31.155+02:00  INFO 26004 --- [account-service] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-29T14:56:31.345+02:00  INFO 26004 --- [account-service] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-29T14:56:32.322+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.config.AbstractConfig   : ConsumerConfig values: 
+	allow.auto.create.topics = true
+	auto.commit.interval.ms = 5000
+	auto.offset.reset = earliest
+	bootstrap.servers = [localhost:62191]
+	check.crcs = true
+	client.dns.lookup = use_all_dns_ips
+	client.id = consumer-account-service-1
+	client.rack = 
+	config.providers = []
+	connections.max.idle.ms = 540000
+	default.api.timeout.ms = 60000
+	enable.auto.commit = false
+	enable.metrics.push = true
+	exclude.internal.topics = true
+	fetch.max.bytes = 52428800
+	fetch.max.wait.ms = 500
+	fetch.min.bytes = 1
+	group.id = account-service
+	group.instance.id = null
+	group.protocol = classic
+	group.remote.assignor = null
+	heartbeat.interval.ms = 3000
+	interceptor.classes = []
+	internal.throw.on.fetch.stable.offset.unsupported = false
+	isolation.level = read_uncommitted
+	key.deserializer = class org.apache.kafka.common.serialization.StringDeserializer
+	max.partition.fetch.bytes = 1048576
+	max.poll.interval.ms = 300000
+	max.poll.records = 500
+	metadata.max.age.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partition.assignment.strategy = [class org.apache.kafka.clients.consumer.RangeAssignor, class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+	receive.buffer.bytes = 65536
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = []
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	session.timeout.ms = 45000
+	share.acknowledgement.mode = implicit
+	share.acquire.mode = BATCH_OPTIMIZED
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = []
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	value.deserializer = class org.springframework.kafka.support.serializer.JsonDeserializer
+
+2026-07-29T14:56:32.426+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-07-29T14:56:32.894+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.2.1
+2026-07-29T14:56:32.895+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 92f61c44867f39dc
+2026-07-29T14:56:32.899+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1785329792888
+2026-07-29T14:56:32.906+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.c.c.i.ClassicKafkaConsumer         : [Consumer clientId=consumer-account-service-1, groupId=account-service] Subscribed to topic(s): transactions
+2026-07-29T14:56:32.941+02:00  INFO 26004 --- [account-service] [    Test worker] c.k.a.AccountServiceIntegrationTest      : Started AccountServiceIntegrationTest in 6.74 seconds (process running for 20.378)
+2026-07-29T14:56:33.758+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.config.AbstractConfig   : ProducerConfig values: 
+	acks = -1
+	batch.size = 16384
+	bootstrap.servers = [localhost:62191]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = producer-1
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	config.providers = []
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 5
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = []
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = []
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transaction.two.phase.commit.enable = false
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2026-07-29T14:56:33.763+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-07-29T14:56:33.786+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=producer-1] Instantiated an idempotent producer.
+2026-07-29T14:56:33.819+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.2.1
+2026-07-29T14:56:33.820+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 92f61c44867f39dc
+2026-07-29T14:56:33.821+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1785329793819
+2026-07-29T14:56:33.954+02:00  WARN 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] The metadata response from the cluster reported a recoverable issue with correlation id 3 : {transactions=UNKNOWN_TOPIC_OR_PARTITION}
+2026-07-29T14:56:33.954+02:00  WARN 26004 --- [account-service] [ad | producer-1] org.apache.kafka.clients.NetworkClient   : [Producer clientId=producer-1] The metadata response from the cluster reported a recoverable issue with correlation id 2 : {transactions=UNKNOWN_TOPIC_OR_PARTITION}
+2026-07-29T14:56:33.963+02:00  INFO 26004 --- [account-service] [ad | producer-1] org.apache.kafka.clients.Metadata        : [Producer clientId=producer-1] Cluster ID: 4L6g3nShT-eMCtK--X86sw
+2026-07-29T14:56:33.963+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.Metadata        : [Consumer clientId=consumer-account-service-1, groupId=account-service] Cluster ID: 4L6g3nShT-eMCtK--X86sw
+2026-07-29T14:56:34.094+02:00  INFO 26004 --- [account-service] [ad | producer-1] o.a.k.c.p.internals.TransactionManager   : [Producer clientId=producer-1] ProducerId set to 0 with epoch 0
+2026-07-29T14:56:34.137+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Discovered group coordinator localhost:62191 (id: 2147483646 rack: null isFenced: false)
+2026-07-29T14:56:34.140+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] (Re-)joining group
+2026-07-29T14:56:34.210+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Request joining group due to: need to re-join with the given member-id: consumer-account-service-1-d092b1f6-1d2b-4adf-a9ac-8fd06d535ac5
+2026-07-29T14:56:34.211+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] (Re-)joining group
+2026-07-29T14:56:34.240+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=producer-1] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2026-07-29T14:56:34.256+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Successfully joined group with generation Generation{generationId=1, memberId='consumer-account-service-1-d092b1f6-1d2b-4adf-a9ac-8fd06d535ac5', protocol='range'}
+2026-07-29T14:56:34.263+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-07-29T14:56:34.264+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-07-29T14:56:34.264+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2026-07-29T14:56:34.264+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-07-29T14:56:34.268+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : App info kafka.producer for producer-1 unregistered
+2026-07-29T14:56:34.271+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.config.AbstractConfig   : ProducerConfig values: 
+	acks = -1
+	batch.size = 16384
+	bootstrap.servers = [localhost:62191]
+	buffer.memory = 33554432
+	client.dns.lookup = use_all_dns_ips
+	client.id = producer-2
+	compression.gzip.level = -1
+	compression.lz4.level = 9
+	compression.type = none
+	compression.zstd.level = 3
+	config.providers = []
+	connections.max.idle.ms = 540000
+	delivery.timeout.ms = 120000
+	enable.idempotence = true
+	enable.metrics.push = true
+	interceptor.classes = []
+	key.serializer = class org.apache.kafka.common.serialization.StringSerializer
+	linger.ms = 5
+	max.block.ms = 60000
+	max.in.flight.requests.per.connection = 5
+	max.request.size = 1048576
+	metadata.max.age.ms = 300000
+	metadata.max.idle.ms = 300000
+	metadata.recovery.rebootstrap.trigger.ms = 300000
+	metadata.recovery.strategy = rebootstrap
+	metric.reporters = [org.apache.kafka.common.metrics.JmxReporter]
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	partitioner.adaptive.partitioning.enable = true
+	partitioner.availability.timeout.ms = 0
+	partitioner.class = null
+	partitioner.ignore.keys = false
+	receive.buffer.bytes = 32768
+	reconnect.backoff.max.ms = 1000
+	reconnect.backoff.ms = 50
+	request.timeout.ms = 30000
+	retries = 2147483647
+	retry.backoff.max.ms = 1000
+	retry.backoff.ms = 100
+	sasl.client.callback.handler.class = null
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.login.callback.handler.class = null
+	sasl.login.class = null
+	sasl.login.connect.timeout.ms = null
+	sasl.login.read.timeout.ms = null
+	sasl.login.refresh.buffer.seconds = 300
+	sasl.login.refresh.min.period.seconds = 60
+	sasl.login.refresh.window.factor = 0.8
+	sasl.login.refresh.window.jitter = 0.05
+	sasl.login.retry.backoff.max.ms = 10000
+	sasl.login.retry.backoff.ms = 100
+	sasl.mechanism = GSSAPI
+	sasl.oauthbearer.assertion.algorithm = RS256
+	sasl.oauthbearer.assertion.claim.aud = null
+	sasl.oauthbearer.assertion.claim.exp.seconds = 300
+	sasl.oauthbearer.assertion.claim.iss = null
+	sasl.oauthbearer.assertion.claim.jti.include = false
+	sasl.oauthbearer.assertion.claim.nbf.seconds = 60
+	sasl.oauthbearer.assertion.claim.sub = null
+	sasl.oauthbearer.assertion.file = null
+	sasl.oauthbearer.assertion.private.key.file = null
+	sasl.oauthbearer.assertion.private.key.passphrase = null
+	sasl.oauthbearer.assertion.template.file = null
+	sasl.oauthbearer.client.credentials.client.id = null
+	sasl.oauthbearer.client.credentials.client.secret = null
+	sasl.oauthbearer.clock.skew.seconds = 30
+	sasl.oauthbearer.expected.audience = []
+	sasl.oauthbearer.expected.issuer = null
+	sasl.oauthbearer.header.urlencode = false
+	sasl.oauthbearer.jwks.endpoint.refresh.ms = 3600000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.max.ms = 10000
+	sasl.oauthbearer.jwks.endpoint.retry.backoff.ms = 100
+	sasl.oauthbearer.jwks.endpoint.url = null
+	sasl.oauthbearer.jwt.retriever.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtRetriever
+	sasl.oauthbearer.jwt.validator.class = class org.apache.kafka.common.security.oauthbearer.DefaultJwtValidator
+	sasl.oauthbearer.scope = null
+	sasl.oauthbearer.scope.claim.name = scope
+	sasl.oauthbearer.sub.claim.name = sub
+	sasl.oauthbearer.token.endpoint.url = null
+	security.protocol = PLAINTEXT
+	security.providers = null
+	send.buffer.bytes = 131072
+	socket.connection.setup.timeout.max.ms = 30000
+	socket.connection.setup.timeout.ms = 10000
+	ssl.cipher.suites = []
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.3]
+	ssl.endpoint.identification.algorithm = https
+	ssl.engine.factory.class = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.certificate.chain = null
+	ssl.keystore.key = null
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLSv1.3
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.certificates = null
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.timeout.ms = 60000
+	transaction.two.phase.commit.enable = false
+	transactional.id = null
+	value.serializer = class org.apache.kafka.common.serialization.StringSerializer
+
+2026-07-29T14:56:34.278+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Finished assignment for group at generation 1: {consumer-account-service-1-d092b1f6-1d2b-4adf-a9ac-8fd06d535ac5=Assignment(partitions=[transactions-0])}
+2026-07-29T14:56:34.280+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.c.t.i.KafkaMetricsCollector        : initializing Kafka metrics collector
+2026-07-29T14:56:34.281+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=producer-2] Instantiated an idempotent producer.
+2026-07-29T14:56:34.302+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka version: 4.2.1
+2026-07-29T14:56:34.303+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka commitId: 92f61c44867f39dc
+2026-07-29T14:56:34.303+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : Kafka startTimeMs: 1785329794302
+2026-07-29T14:56:34.353+02:00  INFO 26004 --- [account-service] [ad | producer-2] org.apache.kafka.clients.Metadata        : [Producer clientId=producer-2] Cluster ID: 4L6g3nShT-eMCtK--X86sw
+2026-07-29T14:56:34.354+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Successfully synced group in generation Generation{generationId=1, memberId='consumer-account-service-1-d092b1f6-1d2b-4adf-a9ac-8fd06d535ac5', protocol='range'}
+2026-07-29T14:56:34.355+02:00  INFO 26004 --- [account-service] [ad | producer-2] o.a.k.c.p.internals.TransactionManager   : [Producer clientId=producer-2] ProducerId set to 1 with epoch 0
+2026-07-29T14:56:34.355+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Notifying assignor about the new Assignment(partitions=[transactions-0])
+2026-07-29T14:56:34.363+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] k.c.c.i.ConsumerRebalanceListenerInvoker : [Consumer clientId=consumer-account-service-1, groupId=account-service] Adding newly assigned partitions: [transactions-0]
+2026-07-29T14:56:34.391+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.k.clients.producer.KafkaProducer     : [Producer clientId=producer-2] Closing the Kafka producer with timeoutMillis = 9223372036854775807 ms.
+2026-07-29T14:56:34.409+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Metrics scheduler closed
+2026-07-29T14:56:34.410+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.metrics.JmxReporter
+2026-07-29T14:56:34.411+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Closing reporter org.apache.kafka.common.telemetry.internals.ClientTelemetryReporter
+2026-07-29T14:56:34.411+02:00  INFO 26004 --- [account-service] [    Test worker] o.apache.kafka.common.metrics.Metrics    : Metrics reporters closed
+2026-07-29T14:56:34.417+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Found no committed offset for partition transactions-0
+2026-07-29T14:56:34.418+02:00  INFO 26004 --- [account-service] [    Test worker] o.a.kafka.common.utils.AppInfoParser     : App info kafka.producer for producer-2 unregistered
+2026-07-29T14:56:34.469+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.k.c.c.internals.SubscriptionState    : [Consumer clientId=consumer-account-service-1, groupId=account-service] Resetting offset for partition transactions-0 to position FetchPosition{offset=0, offsetEpoch=Optional.empty, currentLeader=LeaderAndEpoch{leader=Optional[localhost:62191 (id: 1 rack: null isFenced: false)], epoch=0}}.
+2026-07-29T14:56:34.472+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.s.k.l.KafkaMessageListenerContainer    : account-service: partitions assigned: [transactions-0]
+2026-07-29T14:56:34.638+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] c.kafkademo.account.TransactionConsumer  : Received transaction event: TransactionEvent{customerID=42,amount=100.00,currency=CHF,timestamp=1785329794567}
+2026-07-29T14:56:34.927+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] ch.kafkademo.account.AccountService      : Updated balance for customer 42 -> 100.00
+2026-07-29T14:56:34.982+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] c.kafkademo.account.TransactionConsumer  : Received transaction event: TransactionEvent{customerID=42,amount=-30.00,currency=CHF,timestamp=1785329794573}
+2026-07-29T14:56:35.011+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] ch.kafkademo.account.AccountService      : Updated balance for customer 42 -> 70.00
+2026-07-29T14:56:35.195+02:00  WARN 26004 --- [account-service] [    Test worker] o.j.j.e.d.AbstractExtensionContext       : Type implements CloseableResource but not AutoCloseable: org.testcontainers.junit.jupiter.TestcontainersExtension$StoreAdapter
+2026-07-29T14:56:35.865+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] Node 1 disconnected.
+2026-07-29T14:56:35.869+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] Cancelled in-flight FETCH request with correlation id 20 due to node 1 being disconnected (elapsed time since creation: 198ms, elapsed time since send: 198ms, throttle time: 0ms, request timeout: 30000ms)
+2026-07-29T14:56:35.869+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] Node 2147483646 disconnected.
+2026-07-29T14:56:35.872+02:00  INFO 26004 --- [account-service] [account-service] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] Node -1 disconnected.
+2026-07-29T14:56:35.873+02:00  INFO 26004 --- [account-service] [account-service] o.a.k.c.c.internals.ConsumerCoordinator  : [Consumer clientId=consumer-account-service-1, groupId=account-service] Group coordinator localhost:62191 (id: 2147483646 rack: null isFenced: false) is unavailable or invalid due to cause: coordinator unavailable. isDisconnected: true. Rediscovery will be attempted.
+2026-07-29T14:56:35.871+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] o.a.kafka.clients.FetchSessionHandler    : [Consumer clientId=consumer-account-service-1, groupId=account-service] Error sending fetch request (sessionId=39027616, epoch=3) to node 1:
+
+org.apache.kafka.common.errors.DisconnectException
+
+2026-07-29T14:56:36.002+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] Node 1 disconnected.
+2026-07-29T14:56:36.003+02:00  INFO 26004 --- [account-service] [ntainer#0-0-C-1] org.apache.kafka.clients.NetworkClient   : [Consumer clientId=consumer-account-service-1, groupId=account-service] Cancelled in-flight API_VERSIONS request with correlation id 21 due to node 1 being disconnected (elapsed time since creation: 5ms, elapsed time since send: 5ms, throttle time: 0ms, request timeout: 30000ms)
+]]></system-out>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\daud9\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.18.10\9426d28828bdcdf42666bb7a68c468279ea78f59\byte-buddy-agent-1.18.10.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

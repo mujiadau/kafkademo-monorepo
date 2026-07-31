@@ -1,0 +1,9 @@
+# Build artifacts and local tooling – keep the Docker build context small.
+**/build/
+.gradle/
+.idea/
+*.iml
+.git/
+.gitignore
+HELP.md
+README.md
