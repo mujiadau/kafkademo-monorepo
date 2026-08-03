@@ -50,45 +50,45 @@ services:
     volumes:
       - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
 
-#  transaction-service:
-#    build:
-#      context: .
-#      dockerfile: transaction-service/Dockerfile
-#    container_name: kafkademo-transaction-service
-#    ports:
-#      - "8081:8081"
-#    depends_on:
-#      - kafka
-#      - keycloak
-#    environment:
-#      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-#      KEYCLOAK_ISSUER_URI: http://keycloak:8080/realms/kafkademo#
-#
-# account-service:
-#   build:
-#     context: .
-#     dockerfile: account-service/Dockerfile
-#   container_name: kafkademo-account-service
-#   ports:
-#     - "8082:8082"
-#   depends_on:
-#     - kafka
-#     - postgres
-#   environment:
-#     SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-#     SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/kafkademo
-#     SPRING_DATASOURCE_USERNAME: kafkademo
-#     SPRING_DATASOURCE_PASSWORD: kafkademo
-#
-# customer-service:
-#   build:
-#     context: .
-#     dockerfile: customer-service/Dockerfile
-#   container_name: kafkademo-customer-service
-#   ports:
-#     - "8083:8083"
-#   depends_on:
-#     - kafka
-#   environment:
-#     SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+  transaction-service:
+     build:
+       context: .
+       dockerfile: transaction-service/Dockerfile
+     container_name: kafkademo-transaction-service
+     ports:
+       - "8083:8083"
+     depends_on:
+       - kafka
+       - keycloak
+     environment:
+       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+       KEYCLOAK_ISSUER_URI: http://keycloak:8080/realms/kafkademo
+
+  account-service:
+    build:
+      context: .
+      dockerfile: account-service/Dockerfile
+    container_name: kafkademo-account-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - kafka
+      - postgres
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/kafkademo
+      SPRING_DATASOURCE_USERNAME: kafkademo
+      SPRING_DATASOURCE_PASSWORD: kafkademo
+
+  customer-service:
+    build:
+      context: .
+      dockerfile: customer-service/Dockerfile
+    container_name: kafkademo-customer-service
+    ports:
+      - "8081:8083"
+    depends_on:
+      - kafka
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
 
