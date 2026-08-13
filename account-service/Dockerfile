@@ -10,8 +10,6 @@ COPY settings.gradle.kts build.gradle.kts ./
 # configure the multi-module build (only this service's bootJar is assembled).
 COPY common common
 COPY account-service account-service
-COPY customer-service customer-service
-COPY transaction-service transaction-service
 
 RUN gradle :account-service:bootJar --no-daemon
 

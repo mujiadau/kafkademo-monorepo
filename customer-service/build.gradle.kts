@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common"))
+    implementation("ch.kafkademo:common")
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-kafka")
 

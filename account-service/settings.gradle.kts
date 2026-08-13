@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.kotlin
+
 pluginManagement{
     repositories {
         gradlePluginPortal()
@@ -11,9 +13,6 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-rootProject.name = "kafkademo-monorepo"
+rootProject.name = "account-service"
 
-includeBuild("common")
-
-include("transaction-service")
-include("customer-service")
+includeBuild("../common")
