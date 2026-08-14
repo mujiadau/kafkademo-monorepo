@@ -1,7 +1,14 @@
 plugins {
     java
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
+    id("org.springframework.boot") version "4.1.0"
+    id("io.spring.dependency-management") version "1.1.7"
+}
+
+group = "ch.kafkademo"
+version = "1.0.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
