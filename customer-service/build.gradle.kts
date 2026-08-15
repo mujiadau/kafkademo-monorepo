@@ -16,6 +16,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-kafka")
 
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.springframework.kafka:spring-kafka-test")
