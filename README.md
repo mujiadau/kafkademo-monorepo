@@ -26,12 +26,12 @@ A small event-driven banking playground built with Spring Boot and Kafka.
 
 ### Modules
 
-| Module                | Responsibility                                                        |
-|-----------------------|-----------------------------------------------------------------------|
-| `common`              | Shared `TransactionEvent` DTO published/consumed over Kafka.          |
-| `transaction-service` | Secured REST API. Accepts a transaction and produces a Kafka event. Port 8081.|
-| `account-service`     | Consumes events and stores the new balance in Postgres. Port 8082.    |
-| `customer-service`    | Consumes events and "sends an email" (prints a log line). Port 8083.  |
+| Module                | Responsibility                                                                 |
+|-----------------------|--------------------------------------------------------------------------------|
+| `common`              | Shared `TransactionEvent` DTO published/consumed over Kafka.                   |
+| `transaction-service` | Secured REST API. Accepts a transaction and produces a Kafka event. Port 8083. |
+| `account-service`     | Consumes events and stores the new balance in Postgres.                        |
+| `customer-service`    | Consumes events and "sends an email" (prints a log line).                      |
 
 ## Security
 
@@ -45,8 +45,8 @@ expiry and issuer). The `/actuator/health` endpoint stays public for probes.
 The identity provider is configured by the `keycloak/realm-export.json` file,
 which is imported automatically on startup and provisions:
 
-- realm `pgbank`
-- a public client `pgbank-client` (with the *Direct Access Grants* / password flow enabled)
+- realm `kafkademo`
+- a public client `kafkademo-client` (with the *Direct Access Grants* / password flow enabled)
 - a client scope `transactions:write`
 - a demo user `alice` / password `alice`
 
@@ -63,9 +63,9 @@ containers reach Keycloak under the same name:
 Then request a token and call the API:
 
 ```bash
-TOKEN=$(curl -s http://keycloak:8080/realms/pgbank/protocol/openid-connect/token \
+TOKEN=$(curl -s http://keycloak:8080/realms/kafkademo/protocol/openid-connect/token \
   -d grant_type=password \
-  -d client_id=pgbank-client \
+  -d client_id=kafkademo-client \
   -d username=alice \
   -d password=alice \
   -d 'scope=openid transactions:write' | jq -r .access_token)
@@ -125,9 +125,9 @@ Each service has a multi-stage `Dockerfile` (Gradle build stage + slim JRE
 runtime stage) at its module root. Build a single image from the repository root:
 
 ```bash
-docker build -f transaction-service/Dockerfile -t pgbank/transaction-service .
-docker build -f account-service/Dockerfile     -t pgbank/account-service .
-docker build -f customer-service/Dockerfile     -t pgbank/customer-service .
+docker build -f transaction-service/Dockerfile -t kafkademo/transaction-service .
+docker build -f account-service/Dockerfile     -t kafkademo/account-service .
+docker build -f customer-service/Dockerfile     -t kafkademo/customer-service .
 ```
 
 ## Tests
