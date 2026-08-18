@@ -5,7 +5,12 @@ name: Build and Push Docker Images
 # (2,000 min/month on the free plan).
 on:
   push:
-    branches: [main]
+    branches:
+      - master
+      - 'feat/github'
+  pull_request:
+    branches:
+      - master
   workflow_dispatch: {}
 
 jobs:
