@@ -22,5 +22,5 @@ USER spring:spring
 # Copy the built jar from the build stage
 COPY --from=build /workspace/transaction-service/build/libs/*.jar app.jar
 
-EXPOSE 8081
+EXPOSE 8083
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]

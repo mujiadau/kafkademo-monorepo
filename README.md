@@ -30,7 +30,7 @@ A small event-driven banking playground built with Spring Boot and Kafka.
 |-----------------------|--------------------------------------------------------------------------------|
 | `common`              | Shared `TransactionEvent` DTO published/consumed over Kafka.                   |
 | `transaction-service` | Secured REST API. Accepts a transaction and produces a Kafka event. Port 8083. |
-| `account-service`     | Consumes events and stores the new balance in Postgres.                        |
+| `account-service`     | Consumes events and stores the new balance in Postgres. Port 8082.              |
 | `customer-service`    | Consumes events and "sends an email" (prints a log line).                      |
 
 ## Security
@@ -93,22 +93,22 @@ The Keycloak admin console is available at <http://localhost:8080>
 
 ### Running the services from source instead
 
-If you prefer to run the services from Gradle, start only the infrastructure and
-point the services at the host-published ports (Kafka is exposed on
-`localhost:29092`):
+If you prefer to run the services from Gradle, start only the infrastructure.
+Each service is an independent Gradle build; run the commands below from the
+repository root in separate terminals. Kafka is exposed on `localhost:29092`.
 
 ```bash
 docker compose up -d kafka postgres keycloak
 
-./gradlew :transaction-service:bootRun
-./gradlew :account-service:bootRun
-./gradlew :customer-service:bootRun
+(cd transaction-service && ./gradlew bootRun)
+(cd account-service && ./gradlew bootRun)
+(cd customer-service && ./gradlew bootRun)
 ```
 
 Then send a transaction (see [Getting a token](#getting-a-token) above):
 
 ```bash
-curl -X POST http://localhost:8081/api/transactions \
+curl -X POST http://localhost:8083/api/transactions \
   -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' \
   -d '{"customerId": 1, "amount": 20.00}'
@@ -137,7 +137,11 @@ The `transaction-service` test additionally boots a real Keycloak container and
 verifies that requests succeed with a valid JWT and are rejected (`401`) without
 one. Docker must be running.
 
+Run each service's tests from the repository root:
+
 ```bash
-./gradlew test
+(cd transaction-service && ./gradlew test)
+(cd account-service && ./gradlew test)
+(cd customer-service && ./gradlew test)
 ```
 
