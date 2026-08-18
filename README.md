@@ -10,7 +10,7 @@ A small event-driven banking playground built with Spring Boot and Kafka.
                           │
                           ▼
                 ┌───────────────────┐
-                │ transaction-service│  (REST API + Kafka producer)
+                │transaction-service│  (REST API + Kafka producer)
                 └─────────┬─────────┘
                           │  topic: "transactions"
                           ▼
