@@ -1,12 +1,14 @@
 package ch.kafkademo.common;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class TransactionEvent {
     private Long customerId;
     private BigDecimal amount;
     private String currency = "CHF";
     private long timestamp = System.currentTimeMillis();
+    private UUID eventId = UUID.randomUUID();
 
     public TransactionEvent() {
 
@@ -44,6 +46,10 @@ public class TransactionEvent {
         this.timestamp = timestamp;
     }
 
+    public void setEventId(UUID eventId) { this.eventId = eventId; }
+
+    public UUID getEventId() {return this.eventId; }
+
     public TransactionEvent(Long customerId, BigDecimal amount, String currency, long timestamp) {
         this.customerId = customerId;
         this.amount = amount;
@@ -57,6 +63,7 @@ public class TransactionEvent {
                 "customerId=" + customerId +
                 ",amount=" + amount +
                 ",currency=" + currency +
+                ",eventId=" + eventId +
                 ",timestamp=" + timestamp + '}';
     }
 }

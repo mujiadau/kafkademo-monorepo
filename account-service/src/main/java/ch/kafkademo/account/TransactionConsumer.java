@@ -4,6 +4,8 @@ import ch.kafkademo.common.TransactionEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,6 +24,12 @@ public class TransactionConsumer {
             groupId = "account-service")
     public void onTransaction(TransactionEvent event) {
         log.info("Received transaction event: {}", event);
-        accountService.applyTransaction(event.getCustomerId(), event.getAmount());
+
+        // Pass event.getEventId() as the third argument
+        accountService.applyTransaction(
+                event.getCustomerId(),
+                event.getAmount(),
+                event.getEventId()
+        );
     }
 }
