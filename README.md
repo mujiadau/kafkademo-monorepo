@@ -70,7 +70,7 @@ TOKEN=$(curl -s http://keycloak:8080/realms/kafkademo/protocol/openid-connect/to
   -d password=alice \
   -d 'scope=openid transactions:write' | jq -r .access_token)
 
-curl -X POST http://localhost:8081/api/transactions \
+curl -X POST http://localhost:8083/api/transactions \
   -H "Authorization: Bearer $TOKEN" \
   -H 'Content-Type: application/json' \
   -d '{"customerId": 1, "amount": 20.00}'
