@@ -4,7 +4,8 @@
 FROM gradle:9.6-jdk21 AS build
 WORKDIR /workspace
 
-# Copy both the common and account-service directories into the container's workspace.
+# Copy all required monorepo directories into the container
+COPY gradle-toolchain/ gradle-toolchain/
 COPY common/ common/
 COPY account-service/ account-service/
 

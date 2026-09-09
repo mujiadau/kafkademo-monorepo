@@ -5,6 +5,7 @@ FROM gradle:9.6-jdk21 AS build
 WORKDIR /workspace
 
 # Copy both the common and transaction-service directories into the container's workspace.
+COPY gradle-toolchain/ gradle-toolchain/
 COPY common/ common/
 COPY transaction-service/ transaction-service/
 

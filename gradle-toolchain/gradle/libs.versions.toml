@@ -1,0 +1,53 @@
+[versions]
+spring-boot = "4.1.0"
+spring-dependency-management = "1.1.7"
+testcontainers = "1.21.4"
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+
+[libraries]
+# Internal Modules
+kafkademo-common = { module = "ch.kafkademo:common" }
+
+# Jackson & Spring Boot
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind" }
+spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-kafka = { module = "org.springframework.boot:spring-boot-starter-kafka" }
+spring-boot-starter-json = { module = "org.springframework.boot:spring-boot-starter-json" }
+
+# Database
+postgresql = { module = "org.postgresql:postgresql" }
+
+# Testing & Testcontainers
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+spring-boot-testcontainers = { module = "org.springframework.boot:spring-boot-testcontainers" }
+spring-kafka-test = { module = "org.springframework.kafka:spring-kafka-test" }
+testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
+testcontainers-junit = { module = "org.testcontainers:junit-jupiter" }
+testcontainers-kafka = { module = "org.testcontainers:kafka" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
+awaitility = { module = "org.awaitility:awaitility" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+# Web & Validation
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+
+# Security
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
+
+[bundles]
+# Reusable group of dependencies common to all test suites
+testing-common = [
+    "spring-boot-starter-test",
+    "spring-boot-testcontainers",
+    "spring-kafka-test",
+    "testcontainers-junit",
+    "awaitility"
+]

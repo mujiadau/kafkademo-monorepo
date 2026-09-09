@@ -1,7 +1,7 @@
 plugins {
     java
-    id("org.springframework.boot") version "4.1.0"
-    id("io.spring.dependency-management") version "1.1.7"
+    alias(sharedLibs.plugins.spring.boot)
+    alias(sharedLibs.plugins.spring.dependency.management)
 }
 
 group = "ch.kafkademo"
@@ -12,20 +12,25 @@ repositories {
 }
 
 dependencies {
-    implementation("ch.kafkademo:common")
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.springframework.boot:spring-boot-starter-kafka")
+    implementation(project(":common"))
 
-    implementation("com.fasterxml.jackson.core:jackson-databind")
+    // Jackson & Spring Boot
+    implementation(sharedLibs.jackson.databind)
+    implementation(sharedLibs.spring.boot.starter.data.jpa)
+    implementation(sharedLibs.spring.boot.starter.kafka)
+    implementation(sharedLibs.spring.boot.starter.json)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.4"))
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:kafka")
-    testImplementation("org.awaitility:awaitility")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // Database
+    runtimeOnly(sharedLibs.postgresql)
+
+    // Testing & Testcontainers
+    testImplementation(platform(sharedLibs.testcontainers.bom)) // BOMs still need platform()
+    testImplementation(sharedLibs.bundles.testing.common) // Includes the 5 common test dependencies
+    testImplementation(sharedLibs.testcontainers.kafka)
+    testImplementation(sharedLibs.testcontainers.postgresql)
+
+    testRuntimeOnly(sharedLibs.junit.launcher)
+
 }
 
 tasks.withType<Test> {
