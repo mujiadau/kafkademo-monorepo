@@ -32,6 +32,16 @@ testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 awaitility = { module = "org.awaitility:awaitility" }
 junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
+# Web & Validation
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+
+# Security
+spring-boot-starter-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
+
 [bundles]
 # Reusable group of dependencies common to all test suites
 testing-common = [

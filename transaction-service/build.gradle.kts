@@ -2,8 +2,8 @@ import org.gradle.kotlin.dsl.java
 
 plugins {
     java
-    id("org.springframework.boot") version "4.1.0"
-    id("io.spring.dependency-management") version "1.1.7"
+    alias(sharedLibs.plugins.spring.boot)
+    alias(sharedLibs.plugins.spring.dependency.management)
 }
 
 group = "ch.kafkademo"
@@ -13,26 +13,28 @@ repositories {
     mavenCentral()
 }
 
-dependencies{
+dependencies {
+    // Internal Modules
     implementation(project(":common"))
 
-    implementation("com.fasterxml.jackson.core:jackson-databind")
+    // Jackson & Spring Boot
+    implementation(sharedLibs.jackson.databind)
+    implementation(sharedLibs.spring.boot.starter.web)
+    implementation(sharedLibs.spring.boot.starter.validation)
+    implementation(sharedLibs.spring.boot.starter.kafka)
+    implementation(sharedLibs.spring.boot.starter.actuator)
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-kafka")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    // Spring Security as an OAuth 2.0 / OpenID Connect resource server validating JWT Bearer tokens
+    implementation(sharedLibs.spring.boot.starter.security)
+    implementation(sharedLibs.spring.boot.starter.oauth2.resource.server)
 
-    // Spring Security as an OAuth 2.0 / OpenID Connect resource server validating JWT Bearer tokens.
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+    // Testing & Testcontainers
+    testImplementation(platform(sharedLibs.testcontainers.bom))
+    testImplementation(sharedLibs.bundles.testing.common) // Replaces individual core test dependencies
+    testImplementation(sharedLibs.spring.security.test)
+    testImplementation(sharedLibs.testcontainers.kafka)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
-    testImplementation("org.springframework.security:spring-security-test")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.4"))
-    testImplementation("org.testcontainers:kafka")
+    testRuntimeOnly(sharedLibs.junit.launcher)
 }
 
 tasks.withType<Test> {
