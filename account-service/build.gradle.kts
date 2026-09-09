@@ -1,7 +1,7 @@
 plugins {
     java
-    id("org.springframework.boot") version "4.1.0"
-    id("io.spring.dependency-management") version "1.1.7"
+    alias(sharedLibs.plugins.spring.boot)
+    alias(sharedLibs.plugins.spring.dependency.management)
 }
 
 group = "ch.kafkademo"
@@ -12,32 +12,29 @@ repositories {
 }
 
 dependencies {
-    implementation("ch.kafkademo:common:1.0.0-SNAPSHOT")
+    // Internal Modules
+    // For monorepos, it is highly recommended to link projects directly
+    // rather than using Maven coordinates or the TOML file.
+    implementation(project(":common"))
 
-    implementation("com.fasterxml.jackson.core:jackson-databind")
+    // Jackson & Spring Boot
+    implementation(sharedLibs.jackson.databind)
+    implementation(sharedLibs.spring.boot.starter.data.jpa)
+    implementation(sharedLibs.spring.boot.starter.kafka)
+    implementation(sharedLibs.spring.boot.starter.json)
 
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-kafka")
-    implementation("org.springframework.boot:spring-boot-starter-json")
-    runtimeOnly("org.postgresql:postgresql")
+    // Database
+    runtimeOnly(sharedLibs.postgresql)
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.boot:spring-boot-testcontainers")
-    testImplementation("org.springframework.kafka:spring-kafka-test")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.21.4"))
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:kafka")
-    testImplementation("org.testcontainers:postgresql")
-    testImplementation("org.awaitility:awaitility")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // Testing & Testcontainers
+    testImplementation(platform(sharedLibs.testcontainers.bom)) // BOMs still need platform()
+    testImplementation(sharedLibs.bundles.testing.common) // Includes the 5 common test dependencies
+    testImplementation(sharedLibs.testcontainers.kafka)
+    testImplementation(sharedLibs.testcontainers.postgresql)
+
+    testRuntimeOnly(sharedLibs.junit.launcher)
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-
-
-
-
-
