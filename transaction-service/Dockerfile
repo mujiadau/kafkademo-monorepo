@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Build stage -------------------------------------------------------------
-FROM gradle:9.6-jdk21 AS build
+FROM gradle:9.7-jdk21 AS build
 WORKDIR /workspace
 
 # Copy both the common and transaction-service directories into the container's workspace.
