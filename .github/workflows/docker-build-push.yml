@@ -41,7 +41,7 @@ jobs:
           file: ${{ matrix.service }}/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:edge
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:${{ github.sha }}
           cache-from: type=gha,scope=${{ matrix.service }}
           cache-to: type=gha,mode=max,scope=${{ matrix.service }}

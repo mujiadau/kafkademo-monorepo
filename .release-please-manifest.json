@@ -1,0 +1,6 @@
+{
+  "common": "1.0.0",
+  "account-service": "1.0.0",
+  "customer-service": "1.0.0",
+  "transaction-service": "1.0.0"
+}
