@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "separate-pull-requests": false,
+  "include-component-in-tag": true,
+  "include-v-in-tag": true,
+  "changelog-sections": [
+    { "type": "feat", "section": "Features" },
+    { "type": "fix", "section": "Bug Fixes" },
+    { "type": "perf", "section": "Performance Improvements" },
+    { "type": "revert", "section": "Reverts" },
+    { "type": "refactor", "section": "Code Refactoring" },
+    { "type": "deps", "section": "Dependencies" },
+    { "type": "build", "section": "Build System", "hidden": true },
+    { "type": "ci", "section": "Continuous Integration", "hidden": true },
+    { "type": "docs", "section": "Documentation", "hidden": true },
+    { "type": "test", "section": "Tests", "hidden": true },
+    { "type": "chore", "section": "Miscellaneous", "hidden": true }
+  ],
+  "packages": {
+    "common": {
+      "release-type": "simple",
+      "component": "common",
+      "extra-files": ["build.gradle.kts"]
+    },
+    "account-service": {
+      "release-type": "simple",
+      "component": "account-service",
+      "extra-files": ["build.gradle.kts"]
+    },
+    "customer-service": {
+      "release-type": "simple",
+      "component": "customer-service",
+      "extra-files": ["build.gradle.kts"]
+    },
+    "transaction-service": {
+      "release-type": "simple",
+      "component": "transaction-service",
+      "extra-files": ["build.gradle.kts"]
+    }
+  }
+}

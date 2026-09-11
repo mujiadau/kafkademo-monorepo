@@ -130,6 +130,28 @@ docker build -f account-service/Dockerfile     -t kafkademo/account-service .
 docker build -f customer-service/Dockerfile     -t kafkademo/customer-service .
 ```
 
+On every push to `master` the images are published to Docker Hub as `:edge` and
+`:<commit-sha>`. Released versions are published as `:<semver>` and `:latest`.
+
+## Releases
+
+Releases are automated with
+[release-please](https://github.com/googleapis/release-please) in manifest mode.
+Each module (`common`, `account-service`, `customer-service`,
+`transaction-service`) is versioned and released independently.
+
+- Commits must follow [Conventional Commits](https://www.conventionalcommits.org),
+  e.g. `feat(account-service): persist balance history` or
+  `fix(common): correct event timestamp`.
+- release-please opens a single "chore: release" PR that bumps the `version` in
+  the affected `build.gradle.kts` files and updates each module's `CHANGELOG.md`.
+- Merging that PR creates GitHub releases and tags such as
+  `account-service-v1.1.0`, and publishes the corresponding Docker images.
+
+Configuration lives in `release-please-config.json` and
+`.release-please-manifest.json`; the workflow is
+`.github/workflows/release-please.yml`.
+
 ## Tests
 
 Each service ships an integration test powered by [Testcontainers](https://testcontainers.com).
