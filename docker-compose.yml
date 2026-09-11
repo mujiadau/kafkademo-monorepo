@@ -1,6 +1,6 @@
 services:
   kafka:
-    image: apache/kafka:3.9.2
+    image: apache/kafka:4.3.1
     container_name: kafkademo-kafka
     ports:
       # Internal listener for other containers is "kafka:9092".
@@ -24,7 +24,7 @@ services:
       retries: 10
 
   postgres:
-    image: postgres:16-alpine
+    image: postgres:18-alpine
     container_name: kafkademo-postgres
     ports:
       - "5432:5432"
